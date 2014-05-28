@@ -1,171 +1,260 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
+    <!DOCTYPE html>
+    <html lang="en">
     <head>
-        <title>Md. Ashikur Rahman</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="description" content="Animated Circular Portfolio with jQuery" />
-        <meta name="keywords" content="jquery, animate, circle, round, portfolio, design, tutorial"/>
-        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-        <style>
-            *{
-                margin:0;
-                padding:0;
-            }
-            body{
-                font-family:Arial;
-                background:#a7cede url(bg.png) no-repeat top right;
-            }
-            .title{
-                position:absolute;
-                top:0px;
-                left:0px;
-                width:130px;
-                height:570px;
-                background:#a7cede url(title.png) no-repeat top left;
-            }
-            a.back{
-                background:transparent url(back.png) no-repeat 0px 0px;
-                position:absolute;
-                width:150px;
-                height:27px;
-                outline:none;
-                top:2px;
-                right:0px;
-            }
-            
-        </style>
-        <!--[if IE]>
-		 <style>
-                    .circle{
-                        background:transparent url(images/circleIE.gif) no-repeat top left;
-                    }
-                    .description ul a{
-                        font-weight:normal;
-                    }
-		</style>
-        <![endif]-->
-    </head>
-    <body>
-        <div id="content">
-           <!-- <div class="title"></div> -->
-           <div class="wrapper">
-                <div id="images" class="images">
-                    <img id="image_about" src="images/1.png" alt="" width="402" height="402" style="display:block;"/>
-                    <img id="image_portfolio" src="images/2.png" alt="" width="402" height="402"/>
-                    <img id="image_contact" src="images/3.png" alt="" width="402" height="402" />
-                </div>
-                <div class="circleBig">
-                    <div id="menu" class="menu">
-                        <a id="about" class="about" href="">About me</a>
-                        <a id="portfolio" class="portfolio" href="">Portfolio</a>
-                        <a id="contact" class="contact" href="">Contact</a>
-                    </div>
-                </div>
-            </div>
-            <div id="circle_about" class="circle">
-                <div class="description">
-                    <ul>
-                        <li><a href="#">Who I am</a></li>
-                        <li><a href="#">What I do</a></li>
-                        <li><a href="#">My CV</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="circle_portfolio" class="circle">
-                <div class="description">
-                   <!-- <div class="thumbs">
-                        <a href="http://www.flickr.com/photos/patdavid/4100979060/in/set-72157622106008372/"><img src="thumbs/1.jpg" alt=""/></a>
-                        <a href="http://www.flickr.com/photos/patdavid/3793395986/in/set-72157622106008372/"><img src="thumbs/2.jpg" alt=""/></a>
-                        <a href="http://www.flickr.com/photos/patdavid/4242525457/in/set-72157622106008372/"><img src="thumbs/3.jpg" alt=""/></a>
-                        <a href="http://www.flickr.com/photos/patdavid/3799109785/in/set-72157622106008372/"><img src="thumbs/4.jpg" alt=""/></a>
-                        <a href="http://www.flickr.com/photos/patdavid/3871609087/in/set-72157622106008372/"><img src="thumbs/5.jpg" alt=""/></a>
-                        <a href="http://www.flickr.com/photos/patdavid/3872388968/in/set-72157622106008372/"><img src="thumbs/6.jpg" alt=""/></a>
-                        <a href="http://www.flickr.com/photos/patdavid/3866147681/in/set-72157622106008372/"><img src="thumbs/7.jpg" alt=""/></a>
-                        <a href="http://www.flickr.com/photos/patdavid/3872389922/in/set-72157622106008372/"><img src="thumbs/8.jpg" alt=""/></a>
-                        <a href="http://www.flickr.com/photos/patdavid/4127983465/in/set-72157622106008372/"><img src="thumbs/9.jpg" alt=""/></a>
-                    </div> -->
-                </div>
-            </div>
-            <div id="circle_contact" class="circle">
-                <div class="description">
-                    <ul>
-                        <li><a href="#">Email</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Facebook</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- The JavaScript -->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <script type="text/javascript" src="jquery.path.js"></script>
-        <script type="text/javascript">
-            $(function() {
-                
-                /* when page loads animate the about section by default */
-                //move($('#about'),2000,2);
-
-                $('#menu > a').mouseover(
-                function(){
-                    var $this = $(this);
-                    move($this,800,1);
-                }
-            );
-
-                /*
-                function to animate / show one circle.
-                speed is the time it takes to show the circle
-                turns is the turns the circle gives around the big circle
-                 */
-                function move($elem,speed,turns){
-                    var id = $elem.attr('id');
-                    var $circle = $('#circle_'+id);
-
-                    /* if hover the same one nothing happens */
-                    if($circle.css('opacity')==1)
-                        return;
-
-                    /* change the image */
-                    $('#image_'+id).stop(true,true).fadeIn(650).siblings().not(this).fadeOut(650);
-
-                    /*
-                    if there's a circle already, then let's remove it:
-                    either animate it in a circular movement or just fading out, depending on the current position of it
-                     */
-                    $('#content .circle').each(function(i){
-                        var $theCircle = $(this);
-                        if($theCircle.css('opacity')==1)
-                            $theCircle.stop()
-                        .animate({
-                            path : new $.path.arc({
-                                center	: [409,359],
-                                radius	: 257,
-                                start	: 65,
-                                end     : -110,
-                                dir	: -1
-                            }),
-                            opacity: '0'
-                        },1500);
-                        else
-                            $theCircle.stop()
-                        .animate({opacity: '0'},200);
-                    });
-
-                    /* make the circle appear in a circular movement */
-                    var end = 65 - 360 * (turns-1);
-                    $circle.stop()
-                    .animate({
-                        path : new $.path.arc({
-                            center	: [409,359],
-                            radius	: 257,
-                            start	: 180,
-                            end		: end,
-                            dir		: -1
-                        }),
-                        opacity: '1'
-                    },speed);
+    <meta charset="utf-8">
+    <title>SINGLE PAGE | Flat Design Mini Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Flat Design Mini Portfolio">
+    <meta name="keywords" content="responsive, bootstrap, flat design, flat ui, portfolio">
+    <meta name="author" content="Dzyngiri">
+    <meta name="description" content="This is a responsive flat design mini portfolio for creative folks who want to showcase their work online.">
+    <!-- styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/style-single-page.css" rel="stylesheet">
+    <link href="font/css/fontello.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <!-- Add fancyBox main JS and CSS files -->
+    <script type="text/javascript" src="js/jquery.fancybox.js?v=2.1.5"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css?v=2.1.5" media="screen" />
+    <script>
+                $(document).ready(function() {
+            $(".fancybox-thumb").fancybox({
+                helpers	: {
+                    title	: {
+                        type: 'inside'
+                    },
+                    overlay : {
+                                css : {
+                                    'background' : 'rgba(1,1,1,0.65)'
+                                }
+                            }
                 }
             });
-        </script>
+        });
+  </script>
+    </head>
+    <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#profile"><img src="img/user.jpg"/></a>
+          <ul class="nav nav-collapse pull-right">
+            <li><a href="#profile"><i class="icon-user"></i> Profile</a></li>
+            <li><a href="#skills"><i class="icon-trophy"></i> Skills</a></li>
+            <li><a href="#work"><i class="icon-picture"></i> Work</a></li>
+            <li><a href="#resume"><i class="icon-doc-text"></i> Resume</a></li>
+          </ul>
+          <!-- Everything you want hidden at 940px or less, place within here -->
+          <div class="nav-collapse collapse">
+            <!-- .nav, .navbar-search, .navbar-form, etc -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+      <!--Profile container-->
+      <div id="profile" class="container">
+        <div class="span3"> <img src="img/mini.png"> </div>
+        <div class="span5">
+          <h1>Md. Ashikur Rahman</h1>
+          <h3>Web applications &amp; software developer</h3>
+          <p> Hello I am Md. Ashikur Rahman Web applications and software developer from Bangladesh. If yopu have something to be done just call my name and I will be there. :-) </p>
+          <a href="##myModal" role="button" data-toggle="modal" class="hire-me"><i class="icon-paper-plane"></i> Hire Me </a>
+          <div class="row social">
+              <ul class="social-icons" style="float: left; margin-left: 68px;">
+              <li><a href="https://www.facebook.com/ashikur.rahman.5249" target="_blank"><img src="img/fb.png" alt="facebook"></a></li>
+              <li><a href="https://twitter.com/ashik133" target="_blank"><img src="img/tw.png" alt="twitter"></a></li>
+              <li><a href="https://plus.google.com/+MdAshikurRahmanShuvo/posts" target="_blank"><img src="img/go.png" alt="google plus"></a></li>
+             <!-- <li><a href="#" target="_blank"><img src="img/pin.png" alt="pinterest"></a></li>
+              <li><a href="#" target="_blank"><img src="img/st.png" alt="stumbleupon"></a></li>
+              <li><a href="#" target="_blank"><img src="img/dr.png" alt="dribbble"></a></li> -->
+            </ul>
+          </div>
+        </div>
+        <!-- Social Icons -->
+        <!-- END: Social Icons -->
+      </div>
+      <!--END: Profile container-->
+      <!--Skills container-->
+      <div id="skills" class="container">
+        <h2>My Skills</h2>
+        <div class="row">
+          <div class="span3">
+            <div class="ps">
+              <h3>PHP</h3>
+            </div>
+          </div>
+          <div class="span5">
+            <h3>Framwork (codeIgniter, cakephp) <br/><br/>CMS(Joomla, wordpress, oscommerce)<span>90%</span></h3>
+            <div class="expand-bg"> <span class="expand ps2"> &nbsp; </span> </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span3">
+            <div class="ai">
+              <h3>js</h3>
+            </div>
+          </div>
+          <div class="span5">
+            <h3>jQuery, nodejs<span>60%</span></h3>
+            <div class="expand-bg"> <span class="expand ai2"> &nbsp; </span> </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span3">
+            <div class="html">
+              <h3>HTML5</h3>
+            </div>
+          </div>
+          <div class="span5">
+            <h3>HTML5, HTML4, XML <span>75%</span></h3>
+            <div class="expand-bg"> <span class="expand html2"> &nbsp; </span> </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span3">
+            <div class="css">
+              <h3>CSS3</h3>
+            </div>
+          </div>
+          <div class="span5">
+            <h3>CSS3 <span>85%</span></h3>
+            <div class="expand-bg"> <span class="expand css2"> &nbsp; </span> </div>
+          </div>
+        </div>
+
+         <div class="row">
+          <div class="span3">
+            <div class="psd">
+              <h3>PSD</h3>
+            </div>
+          </div>
+          <div class="span5">
+            <h3>Photoshop, illistrator <span>50%</span></h3>
+            <div class="expand-bg"> <span class="expand psd2"> &nbsp; </span> </div>
+          </div>
+        </div>
+      </div>
+      <!--END: Skills container-->
+      <!-- Works container -->
+      <div id="work" class="container">
+        <h2>My Work</h2>
+        <ul class="work-images">
+          <li>
+            <div>
+                
+                <a class="fancybox-thumb" rel="fancybox-thumb" href="img/1.jpg" title="<p>A dynamic website with custom CMS backed by CodeIgniter framework which allows user to view and work fast and get the required info within the glance of eyes .
+I built the backend and the whole CMS architecture of the site as well as work in front-end too.We improved site conversion by 40% against existing control.</p>">
+
+                    <img src="img/1-thumb.jpg" />
+                </a>
+            </div>
+          </li>
+          <li>
+            <div><a class="fancybox-thumb" rel="fancybox-thumb" href="img/2.jpg"><img src="img/2-thumb.jpg" /></a></div>
+          </li>
+          <li>
+            <div><a class="fancybox-thumb" rel="fancybox-thumb" href="img/3.jpg"><img src="img/3-thumb.jpg" /></a></div>
+          </li>
+        </ul>
+        <ul class="work-images">
+          <li>
+            <div><a class="fancybox-thumb" rel="fancybox-thumb" href="img/4.jpg"><img src="img/4-thumb.jpg" /></a></div>
+          </li>
+          <li>
+            <div><a class="fancybox-thumb" rel="fancybox-thumb" href="img/5.jpg"><img src="img/5-thumb.jpg" /></a></div>
+          </li>
+          <li>
+            <div><a class="fancybox-thumb" rel="fancybox-thumb" href="img/6.jpg"><img src="img/6-thumb.jpg" /></a></div>
+          </li>
+        </ul>
+
+         <ul class="work-images">
+          <li>
+            <div><a class="fancybox-thumb" rel="fancybox-thumb" href="img/7.jpg"><img src="img/7-thumb.jpg" /></a></div>
+          </li>
+          <li>
+            <div><a class="fancybox-thumb" rel="fancybox-thumb" href="img/8.jpg"><img src="img/8-thumb.jpg" /></a></div>
+          </li>
+          <li>
+            <div><a class="fancybox-thumb" rel="fancybox-thumb" href="img/9.jpg"><img src="img/9-thumb.jpg" /></a></div>
+          </li>
+        </ul>
+         <ul class="work-images">
+          <li>
+            <div><a class="fancybox-thumb" rel="fancybox-thumb" href="img/10.jpg"><img src="img/10-thumb.jpg" /></a></div>
+          </li>
+           <li>
+            <div><a class="fancybox-thumb" rel="fancybox-thumb" href="img/11.jpg"><img src="img/11-thumb.jpg" /></a></div>
+          </li>
+          <li>
+            <div><a class="fancybox-thumb" rel="fancybox-thumb" href="img/12.jpg"><img src="img/12-thumb.jpg" /></a></div>
+          </li>
+        </ul>
+        <!--Dummy images by The Fox And King :: http://dribbble.com/snootyfox-->
+      </div>
+      <!--END: Work container-->
+      <!-- Resume container -->
+      <div id="resume" class="container">
+        <h2>My Resume</h2>
+        <h3>You can download my resume for your reference and I hope that we will meet very soon! :)</h3>
+        <div class="btn-center"> <a href="Ashikur_Rahman_CV.pdf" class="hire-me" target="_blank"><i class="icon-download"></i> Download Resume</a>
+          <h2>49.9 kb</h2>
+        </div>
+      </div>
+      <!--END: Resume container-->
+      <!-- Social Icons -->
+      <div class="row social">
+        <ul class="social-icons">
+           <li><a href="https://www.facebook.com/ashikur.rahman.5249" target="_blank"><img src="img/fb.png" alt="facebook"></a></li>
+           <li><a href="https://twitter.com/ashik133" target="_blank"><img src="img/tw.png" alt="twitter"></a></li>
+           <li><a href="https://plus.google.com/+MdAshikurRahmanShuvo/posts" target="_blank"><img src="img/go.png" alt="google plus"></a></li>
+         
+        </ul>
+      </div>
+      <!-- END: Social Icons -->
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+      <div class="container">
+        <p class="pull-left"><a href="http://ashikur-rahman.github.io">http://ashikur-rahman.github.io</a></p>
+        <p class="pull-right"><a href="##myModal" role="button" data-toggle="modal"> <i class="icon-mail"></i> CONTACT</a></p>
+      </div>
+    </div>
+    <!-- Contact form in Modal -->
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel"><i class="icon-mail"></i> Contact Me</h3>
+      </div>
+        <div class="modal-body" style="min-height: 200px;">
+         <address>
+             Drop your request on :  <a href="mailto:shuvocste@gmail.com"> Ashikur Rahman </a> <br/>
+             Or can add me on your skype : shuvocste <br/>
+             Or can call me on: +880 1556601233
+          </address>
+
+<!--<script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
+<div id="SkypeButton_Call_shuvocste_1">
+  <script type="text/javascript">
+    Skype.ui({
+      "name": "dropdown",
+      "element": "SkypeButton_Call_shuvocste_1",
+      "participants": ["shuvocste"],
+      "imageSize": 24
+    });
+  </script>
+</div> -->
+      </div>
+    </div>
+    <!-- Scripts -->
+    <script src="js/vertical-scroll.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+                $('#myModal').modal('hidden')
+    </script>
     </body>
-</html>
+    </html>
