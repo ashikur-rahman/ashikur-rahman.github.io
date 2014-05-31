@@ -3024,7 +3024,7 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
 }
 .navbar .nav > li > a:focus, .navbar .nav > li > a:hover, .navbar .nav > li > a.active {
 	/*background-color: #203748;*/
-        background-color: #616161;
+        background-color: #808080;
 	color: #fff;
 	text-decoration: none;
 }
