@@ -93,7 +93,7 @@ ul.social-icons li a:hover {
 	height:100px;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
-	border-radius: 50%;
+	/*border-radius: 50%;*/
 	text-align:center;
 	border:8px solid #203748;
 	float:right;
